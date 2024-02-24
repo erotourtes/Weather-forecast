@@ -48,3 +48,23 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.center-v {
+  align-items: center;
+}
+
+.center-h {
+  justify-content: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.end {
+  justify-content: flex-end;
+}
+
+.flex1 {
+  flex: 1;
+}

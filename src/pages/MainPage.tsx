@@ -3,6 +3,8 @@ import AddCardBtn from "./AddCardBtn";
 import Cards from "../components/Cards/Cards";
 import { SearchInput } from "../components/Input/Input";
 import trips from "../dummy/trips";
+import Dialog from "../components/Dialog/Dialog";
+import DialogForm from "./DialogForm/DialogForm";
 
 const MainPage = () => {
   return (
@@ -25,6 +27,9 @@ const MainPage = () => {
         <div>Week forecast goes here</div>
       </div>
       <div className="side"></div>
+      <Dialog isOpen={true}>
+        <DialogForm />
+      </Dialog>
     </div>
   );
 };
