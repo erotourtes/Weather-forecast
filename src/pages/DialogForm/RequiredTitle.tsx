@@ -1,5 +1,3 @@
-import RequiredFormFieldTitle from "../../components/RequiredFormFieldTitle";
-
 const RequiredTitle = ({ title }: { title: string }) => {
   return (
     <div
@@ -8,7 +6,9 @@ const RequiredTitle = ({ title }: { title: string }) => {
         marginTop: "1.5rem",
       }}
     >
-      <RequiredFormFieldTitle title={title} />
+      <h4 style={{ margin: 0 }}>
+        <span style={{ color: "red" }}>*</span> {title}
+      </h4>
     </div>
   );
 };
