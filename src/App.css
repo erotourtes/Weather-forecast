@@ -1,6 +1,15 @@
-#root {
+.container {
+  display: flex;
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 0 8rem;
+  background-color: azure;
+}
+
+.main {
+  flex: 2;
+}
+
+.side {
+  flex: 1;
+  background-color: #4d0808;
 }
