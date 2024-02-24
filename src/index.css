@@ -31,6 +31,32 @@ body {
   }
 } */
 
+input {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  background-color: transparent;
+  width: 100%;
+  outline: none;
+  border-radius: .3rem;
+  padding: .5rem;
+  box-sizing: border-box;
+}
+
+select {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  background-color: transparent;
+  width: 100%;
+  outline: none;
+  border-radius: .3rem;
+  padding: .65rem;
+  box-sizing: border-box;
+}
+
 
 .flex {
   display: flex;
@@ -71,4 +97,8 @@ body {
 
 .click {
   cursor: pointer;
+}
+
+.w-full {
+  width: 100%;
 }

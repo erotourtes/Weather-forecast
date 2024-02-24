@@ -2,14 +2,20 @@ import { PropsWithChildren } from "react";
 import styles from "./Button.module.css";
 
 interface ButtonProps extends PropsWithChildren {
-  type?: "outlined" | "filled";
+  variant?: "outlined" | "filled";
+  type?: "button" | "submit";
   color?: string;
   onClick?: () => void;
 }
 
-const Button = ({ type = "filled", children, onClick }: ButtonProps) => {
+const Button = ({
+  variant = "filled",
+  children,
+  onClick,
+  type = "button",
+}: ButtonProps) => {
   return (
-    <button onClick={onClick} className={`${styles[type]}`}>
+    <button type={type} onClick={onClick} className={`${styles[variant]}`}>
       {children}
     </button>
   );

@@ -10,6 +10,15 @@ import { useState } from "react";
 const MainPage = () => {
   const [isOpen, setOpen] = useState(false);
 
+  const addTrip = (data: any) => {
+    console.log(data);
+  };
+
+  const handleSubmit = (data: any) => {
+    setOpen(false);
+    addTrip(data);
+  };
+
   return (
     <div className="container">
       <div className="main">
@@ -31,7 +40,7 @@ const MainPage = () => {
       </div>
       <div className="side"></div>
       <Dialog isOpen={isOpen}>
-        <DialogForm onClose={() => setOpen(false)} onSubmit={() => {}} />
+        <DialogForm onClose={() => setOpen(false)} onSubmit={handleSubmit} />
       </Dialog>
     </div>
   );
