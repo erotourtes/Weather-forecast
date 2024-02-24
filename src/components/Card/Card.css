@@ -1,6 +1,7 @@
 .card-container {
     background-color: var(--color-primary);
     width: 200px;
+    min-width: 200px;
     overflow: hidden;
 
     .card-content {
