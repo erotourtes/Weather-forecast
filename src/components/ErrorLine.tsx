@@ -1,5 +1,3 @@
-import React from "react";
-
 const ErrorLine = ({ text }: { text: string }) => {
   return (
     <div
