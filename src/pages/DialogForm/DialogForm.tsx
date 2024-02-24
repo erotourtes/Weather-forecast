@@ -7,13 +7,14 @@ import ErrorLine from "../../components/ErrorLine";
 import { TripT } from "../../types/trip";
 import { uuid } from "../../utils/utils";
 import RequiredTitle from "./RequiredTitle";
+import locations from "../../dummy/locations";
 
-const CITY = "city";
+const PLACE = "city";
 const START_DATE = "startDate";
 const END_DATE = "endDate";
 
 type FormValues = {
-  [CITY]: string;
+  [PLACE]: string;
   [START_DATE]: string;
   [END_DATE]: string;
 };
@@ -39,8 +40,16 @@ const DialogForm = ({
     reset();
   };
 
-  const onSubmit = (data: Omit<TripT, "id">) => {
-    onSubmitOrig({ ...data, id: uuid() });
+  const onSubmit = (data: FormValues) => {
+    const [city, country] = data[PLACE].split(",");
+
+    onSubmitOrig({
+      id: uuid(),
+      city,
+      country,
+      startDate: data[START_DATE],
+      endDate: data[END_DATE],
+    });
     reset();
   };
 
@@ -59,16 +68,17 @@ const DialogForm = ({
       <div className={`flex1 flex center-v ${styles.padding}`}>
         <div className={`w-full`}>
           <RequiredTitle title="City" />
-          <select {...register(CITY, { required: true })}>
+          <select {...register(PLACE, { required: true })}>
             <option selected defaultChecked value={""}>
               Select your city
             </option>
-            <option value="istanbul">Istanbul</option>
-            <option value="ankara">Ankara</option>
-            <option value="izmir">Izmir</option>
-            <option value="antalya">Antalya</option>
+            {locations.map((location, index) => (
+              <option key={index} value={location}>
+                {location}
+              </option>
+            ))}
           </select>
-          {errors[CITY] && <ErrorLine text="City is required" />}
+          {errors[PLACE] && <ErrorLine text="City is required" />}
 
           <RequiredTitle title="Start Date" />
           <input type="date" {...register(START_DATE, { required: true })} />

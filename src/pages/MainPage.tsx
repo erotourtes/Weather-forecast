@@ -2,7 +2,7 @@ import "./MainPage.css";
 import AddCardBtn from "./AddCardBtn";
 import Cards from "../components/Cards/Cards";
 import { SearchInput } from "../components/Input/Input";
-import trips from "../dummy/trips";
+import dummyTrips from "../dummy/trips";
 import Dialog from "../components/Dialog/Dialog";
 import DialogForm from "./DialogForm/DialogForm";
 import { useState } from "react";
@@ -10,9 +10,10 @@ import { TripT } from "../types/trip";
 
 const MainPage = () => {
   const [isOpen, setOpen] = useState(false);
+  const [trips, setTrips] = useState<TripT[]>(dummyTrips);
 
   const addTrip = (data: TripT) => {
-    console.log(data);
+    setTrips((prev) => [...prev, data]);
   };
 
   const handleSubmit = (data: TripT) => {
