@@ -68,3 +68,7 @@ body {
 .flex1 {
   flex: 1;
 }
+
+.click {
+  cursor: pointer;
+}

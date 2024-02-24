@@ -15,7 +15,11 @@ const styles: Record<string, React.CSSProperties> = {
 
 const AddCardBtn = ({ onClick }: { onClick?: () => void }) => {
   return (
-    <div onClick={onClick} style={styles.main} className="flex center column">
+    <div
+      onClick={onClick}
+      style={styles.main}
+      className="flex center column click"
+    >
       <FaPlus />
       <h4 style={styles.header}>Add trip</h4>
     </div>

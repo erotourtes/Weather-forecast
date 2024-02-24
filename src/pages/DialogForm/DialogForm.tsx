@@ -26,7 +26,7 @@ const DialogForm = ({ onClose, onSubmit }: DialogFormProps) => {
     <div className={`flex column space-between ${styles.container}`}>
       <div className={`flex row center space-between ${styles.padding}`}>
         <h3>Create trip</h3>
-        <IoClose onClick={onClose} size={25} />
+        <IoClose onClick={onClose} size={25} className="click" />
       </div>
 
       <Divider />
