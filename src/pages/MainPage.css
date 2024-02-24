@@ -1,24 +1,52 @@
+.container-wrapper {
+  height: 100%;
+  width: 100%;
+  container-type: inline-size;
+}
+
 .container {
-  display: flex;
-  max-width: 1280px;
   padding: 0 8rem;
-  background-color: azure;
-}
+  display: flex;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1280px;
+  box-sizing: border-box;
 
-.main {
-  flex: 2;
-  max-width: calc(100% - 350px);
-}
+  .main {
+    flex: 2;
+    max-width: calc(100% - 350px);
+  }
 
-.side {
-  flex: 1;
-  background-color: #4d0808;
-}
+  .side {
+    flex: 1;
+    background-color: #4d0808;
+  }
 
-.input {
-  width: 250px;
+  .input {
+    width: 250px;
+    margin-bottom: 2.5rem;
+  }
+
 }
 
 .cards-row-gap {
   gap: 50px;
+}
+
+@container (max-width: 1024px) {
+  .container {
+    padding: 0 .5rem;
+    flex-direction: column;
+
+    .main {
+      max-width: 100%;
+    }
+  }
+}
+
+@container (max-width: 1280px) {
+  .container {
+    padding: 0 .5rem;
+  }
 }
