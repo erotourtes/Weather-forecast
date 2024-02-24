@@ -1,4 +1,5 @@
 import "./App.css";
+import { SearchInput } from "./components/Input/Input";
 
 function App() {
   return (
@@ -7,7 +8,12 @@ function App() {
         <h2>
           Weather <strong>Forecast</strong>
         </h2>
-        <input type="text" placeholder="Search your trip" />
+        <div className="input">
+          <SearchInput
+            placeholder="Search your trip"
+            onChange={() => console.log("typing")}
+          />
+        </div>
         <div>Trips go here</div>
         <h4>Week</h4>
         <div>Week forecast goes here</div>

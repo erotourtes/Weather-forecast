@@ -13,3 +13,7 @@
   flex: 1;
   background-color: #4d0808;
 }
+
+.input {
+  width: 200px;
+}
