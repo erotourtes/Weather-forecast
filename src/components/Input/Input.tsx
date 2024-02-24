@@ -14,7 +14,7 @@ const Input = (props: InputProps) => {
         type="text"
         placeholder={props.placeholder}
         value={props.value}
-        onChange={(e) => props.onChange(e.target.value)}
+        onChange={(e) => props.onChange(e.target.value.trim())}
       />
     </div>
   );

@@ -14,6 +14,16 @@ const MainPage = () => {
   const [isOpen, setOpen] = useState(false);
   const [trips, setTrips] = useState<TripT[]>(dummyTrips);
   const [selectedTripId, setSelectedTripId] = useState<string>("");
+  const [serachInput, setSearchInput] = useState<string>("");
+
+  const filteredTrips = trips.filter((trip) =>
+    trip.city.toLowerCase().includes(serachInput.toLowerCase())
+  );
+
+  const selectedTrip =
+    filteredTrips.length == 1
+      ? filteredTrips[0]
+      : trips.find((trip) => trip.id === selectedTripId);
 
   const addTrip = (data: TripT) => {
     setTrips((prev) => [...prev, data]);
@@ -34,12 +44,12 @@ const MainPage = () => {
           <div className="input">
             <SearchInput
               placeholder="Search your trip"
-              onChange={() => console.log("typing")}
+              onChange={setSearchInput}
             />
           </div>
           <div className="flex row cards-row-gap">
             <Cards
-              cards={trips}
+              cards={filteredTrips}
               onCardClick={(id) => setSelectedTripId(id)}
               selectedCard={selectedTripId}
             />
@@ -51,9 +61,7 @@ const MainPage = () => {
         <div className="side">
           <SideWeatherInfo
             info={{
-              city: locationFrom(
-                trips.find((trip) => trip.id === selectedTripId)!
-              ),
+              city: locationFrom(selectedTrip),
               temperture: 20,
               day: "Today",
             }}

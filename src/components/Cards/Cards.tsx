@@ -14,7 +14,9 @@ const Cards = ({ cards, onCardClick = () => {}, selectedCard }: CardsProps) => {
       {cards.map((card) => (
         <Card
           selected={selectedCard === card.id}
-          onCardClick={() => onCardClick(card.id)}
+          onCardClick={() =>
+            onCardClick(selectedCard === card.id ? "" : card.id)
+          }
           key={card.id}
           title={card.city}
           body={`${card.startDate} - ${card.endDate}`}

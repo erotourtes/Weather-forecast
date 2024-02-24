@@ -4,7 +4,7 @@ export const uuid = () => {
   return Math.random().toString(36).substring(2, 9);
 };
 
-export const locationFrom = (trip: TripT | null) => {
+export const locationFrom = (trip: TripT | null | undefined) => {
   if (!trip) return "";
   return `${trip.city}, ${trip.country}`;
 };
