@@ -1,5 +1,8 @@
 .container {
     display: flex;
     overflow: scroll;
+}
+
+.cards-row-gap {
     gap: 50px;
 }

@@ -18,3 +18,7 @@
 .input {
   width: 250px;
 }
+
+.cards-row-gap {
+  gap: 50px;
+}

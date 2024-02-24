@@ -1,5 +1,5 @@
+import AddCardBtn from "./AddCardBtn";
 import "./App.css";
-import Card from "./components/Card/Card";
 import Cards from "./components/Cards/Cards";
 import { SearchInput } from "./components/Input/Input";
 
@@ -39,7 +39,10 @@ function App() {
             onChange={() => console.log("typing")}
           />
         </div>
-        <Cards cards={cards} />
+        <div className="flex row cards-row-gap">
+          <Cards cards={cards} />
+          <AddCardBtn />
+        </div>
         <h4>Week</h4>
         <div>Week forecast goes here</div>
       </div>

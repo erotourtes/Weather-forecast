@@ -30,3 +30,21 @@ body {
     background-color: #ffffff;
   }
 } */
+
+
+.flex {
+  display: flex;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
