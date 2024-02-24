@@ -1,4 +1,5 @@
 import "./App.css";
+import Card from "./components/Card/Card";
 import { SearchInput } from "./components/Input/Input";
 
 function App() {
@@ -14,7 +15,9 @@ function App() {
             onChange={() => console.log("typing")}
           />
         </div>
-        <div>Trips go here</div>
+        <div>
+          <Card title="China" body="date" />
+        </div>
         <h4>Week</h4>
         <div>Week forecast goes here</div>
       </div>
