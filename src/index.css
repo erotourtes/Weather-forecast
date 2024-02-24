@@ -91,6 +91,14 @@ select {
   justify-content: space-between;
 }
 
+.space-around {
+  justify-content: space-around;
+}
+
+.space-evenly {
+  justify-content: space-evenly;
+}
+
 .end {
   justify-content: flex-end;
 }

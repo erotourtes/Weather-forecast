@@ -20,7 +20,7 @@
 
   .side {
     flex: 1;
-    background-color: #4d0808;
+    padding: 2rem 0;
   }
 
   .input {

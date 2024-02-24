@@ -1,0 +1,48 @@
+.weather-info {
+    color: rgb(239, 254, 255);
+    background-image: url("https://c4.wallpaperflare.com/wallpaper/520/793/274/clouds-sky-cloudy-dark-wallpaper-preview.jpg");
+    height: 100%;
+    gap: 7rem;
+
+    .day {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0;
+        padding: 0;
+    }
+
+    .degree {
+        font-size: 3rem;
+        font-weight: 300;
+        margin: 0;
+        padding: 0;
+    }
+
+    .city {
+        font-size: 1.5rem;
+        font-weight: 250;
+        margin: 0;
+        padding: 0;
+    }
+
+    .time-row>* {
+        backdrop-filter: brightness(80%);
+        border-radius: 0.7rem;
+        padding: .3rem;
+        width: 3rem;
+    }
+
+    .time {
+        font-size: 1.3rem;
+        font-weight: 750;
+        margin: 0;
+        padding: 0;
+    }
+
+    .unit {
+        font-size: .7rem;
+        font-weight: 250;
+        margin: 0;
+        padding: 0;
+    }
+}

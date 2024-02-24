@@ -7,10 +7,13 @@ import Dialog from "../components/Dialog/Dialog";
 import DialogForm from "./DialogForm/DialogForm";
 import { useState } from "react";
 import { TripT } from "../types/trip";
+import SideWeatherInfo from "./SideWeatherInfo/SideWeatherInfo";
+import { locationFrom } from "../utils/utils";
 
 const MainPage = () => {
   const [isOpen, setOpen] = useState(false);
   const [trips, setTrips] = useState<TripT[]>(dummyTrips);
+  const [selectedTrip, setSelectedTrip] = useState<TripT | null>(null);
 
   const addTrip = (data: TripT) => {
     setTrips((prev) => [...prev, data]);
@@ -41,7 +44,15 @@ const MainPage = () => {
           <h4>Week</h4>
           <div>Week forecast goes here</div>
         </div>
-        <div className="side"></div>
+        <div className="side">
+          <SideWeatherInfo
+            info={{
+              city: locationFrom(selectedTrip),
+              temperture: 20,
+              day: "Today",
+            }}
+          />
+        </div>
       </div>
 
       <Dialog isOpen={isOpen}>
