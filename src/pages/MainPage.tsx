@@ -6,15 +6,16 @@ import trips from "../dummy/trips";
 import Dialog from "../components/Dialog/Dialog";
 import DialogForm from "./DialogForm/DialogForm";
 import { useState } from "react";
+import { TripT } from "../types/trip";
 
 const MainPage = () => {
   const [isOpen, setOpen] = useState(false);
 
-  const addTrip = (data: any) => {
+  const addTrip = (data: TripT) => {
     console.log(data);
   };
 
-  const handleSubmit = (data: any) => {
+  const handleSubmit = (data: TripT) => {
     setOpen(false);
     addTrip(data);
   };

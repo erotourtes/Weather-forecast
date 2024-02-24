@@ -23,17 +23,31 @@ interface DialogFormProps {
   onSubmit: (data: TripT) => void;
 }
 
-const DialogForm = ({ onClose, onSubmit }: DialogFormProps) => {
+const DialogForm = ({
+  onClose: onCloseOrig,
+  onSubmit: onSubmitOrig,
+}: DialogFormProps) => {
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>();
 
+  const onClose = () => {
+    onCloseOrig();
+    reset();
+  };
+
+  const onSubmit = (data: Omit<TripT, "id">) => {
+    onSubmitOrig({ ...data, id: uuid() });
+    reset();
+  };
+
   return (
     <form
       className={`flex column space-between ${styles.container}`}
-      onSubmit={handleSubmit((data) => onSubmit({ ...data, id: uuid() }))}
+      onSubmit={handleSubmit((data) => onSubmit(data))}
     >
       <div className={`flex row center space-between ${styles.padding}`}>
         <h3>Create trip</h3>
@@ -46,7 +60,7 @@ const DialogForm = ({ onClose, onSubmit }: DialogFormProps) => {
         <div className={`w-full`}>
           <RequiredTitle title="City" />
           <select {...register(CITY, { required: true })}>
-            <option selected disabled value={""}>
+            <option selected defaultChecked value={""}>
               Select your city
             </option>
             <option value="istanbul">Istanbul</option>
