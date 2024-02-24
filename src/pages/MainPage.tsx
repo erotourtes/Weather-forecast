@@ -13,7 +13,7 @@ import { locationFrom } from "../utils/utils";
 const MainPage = () => {
   const [isOpen, setOpen] = useState(false);
   const [trips, setTrips] = useState<TripT[]>(dummyTrips);
-  const [selectedTrip, setSelectedTrip] = useState<TripT | null>(null);
+  const [selectedTripId, setSelectedTripId] = useState<string>("");
 
   const addTrip = (data: TripT) => {
     setTrips((prev) => [...prev, data]);
@@ -38,7 +38,11 @@ const MainPage = () => {
             />
           </div>
           <div className="flex row cards-row-gap">
-            <Cards cards={trips} />
+            <Cards
+              cards={trips}
+              onCardClick={(id) => setSelectedTripId(id)}
+              selectedCard={selectedTripId}
+            />
             <AddCardBtn onClick={() => setOpen(true)} />
           </div>
           <h4>Week</h4>
@@ -47,7 +51,9 @@ const MainPage = () => {
         <div className="side">
           <SideWeatherInfo
             info={{
-              city: locationFrom(selectedTrip),
+              city: locationFrom(
+                trips.find((trip) => trip.id === selectedTripId)!
+              ),
               temperture: 20,
               day: "Today",
             }}

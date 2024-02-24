@@ -25,3 +25,14 @@
         font-size: .8rem;
     }
 }
+
+.card-container.selected-card {
+    background-color: transparent;
+
+    .card-content {
+        border: 2px solid rgb(40, 224, 218);
+        border-radius: .7rem;
+        background-color: transparent;
+        box-sizing: border-box;
+    }
+}
