@@ -1,4 +1,6 @@
 .weather-card {
     background-color: var(--color-primary);
     max-width: 100px;
+    min-width: 100px;
+    padding: 1rem;
 }

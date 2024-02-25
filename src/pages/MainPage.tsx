@@ -8,8 +8,6 @@ import AddCardBtn from "./AddCardBtn";
 import DialogForm from "./DialogForm/DialogForm";
 import "./MainPage.css";
 import SideWeatherInfo from "./SideWeatherInfo/SideWeatherInfo";
-import WeatherCard from "../components/WeatherCard/WeatherCard";
-import { ImConfused } from "react-icons/im";
 import WeatherInfo from "./WeatherInfo/WeatherInfo";
 
 const MainPage = () => {
