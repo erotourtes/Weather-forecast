@@ -3,6 +3,7 @@ import dummyTrips from "../dummy/trips";
 import { TripT } from "../types/trip";
 import { compareDates } from "../utils/utils";
 import { TripDAO } from "./TripDAO";
+import initDB from "./initDB";
 
 export const TripsContext = createContext<{
   trips: TripT[];
@@ -17,6 +18,9 @@ export const TripsContext = createContext<{
   chnageTripOrder: async () => {},
   setAllTripsToState: async () => {},
 });
+
+// TODO: extract initDB & TripDAO
+const tripDAO = new TripDAO(initDB());
 
 const TripsProvider = ({ children }: PropsWithChildren) => {
   const [trips, setTrips] = React.useState<TripT[]>([]);
@@ -42,7 +46,8 @@ type SetTrips = React.Dispatch<React.SetStateAction<TripT[]>>;
 
 function addTrip(setTrips: SetTrips) {
   return async (trip: TripT) => {
-    await TripDAO.add(trip)
+    await tripDAO
+      .add(trip)
       .then(() => {
         setTrips((prev) => [...prev, trip]);
       })
@@ -66,7 +71,8 @@ function chnageTripOrder(setTrips: SetTrips) {
 
 function setAllTripsToState(setTrips: SetTrips) {
   return async () => {
-    await TripDAO.getAll()
+    await tripDAO
+      .getAll()
       .then((data) => {
         if (!data || !data.length) return void setTrips(dummyTrips);
         setTrips(data);
@@ -79,10 +85,10 @@ function setAllTripsToState(setTrips: SetTrips) {
 
 function init(setTrips: SetTrips) {
   return async () => {
-    const trips = await TripDAO.getAll();
+    const trips = await tripDAO.getAll();
     if (trips.length) return void setTrips(trips);
 
-    await TripDAO.addAll(dummyTrips);
+    await tripDAO.addAll(dummyTrips);
     setTrips(dummyTrips);
   };
 }

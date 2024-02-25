@@ -1,21 +1,24 @@
 import { TripT } from "../types/trip";
-import dbInit, { TRIPS_STORE } from "./dbInit";
-
-const db = await dbInit();
+import { TRIPS_STORE, WeatherDBT } from "./initDB";
 
 export class TripDAO {
-  static async add(trip: TripT): Promise<void> {
+  constructor(private db: Promise<WeatherDBT>) {}
+
+  async add(trip: TripT): Promise<void> {
+    const db = await this.db;
     await db.put(TRIPS_STORE, trip);
   }
 
-  static async addAll(trips: TripT[]): Promise<void> {
+  async addAll(trips: TripT[]): Promise<void> {
+    const db = await this.db;
     const tx = db.transaction(TRIPS_STORE, "readwrite");
     const store = tx.objectStore(TRIPS_STORE);
     const promises = trips.map((trip) => store.put(trip));
     return await Promise.all(promises).then();
   }
 
-  static async getAll(): Promise<TripT[]> {
+  async getAll(): Promise<TripT[]> {
+    const db = await this.db;
     const tx = db.transaction(TRIPS_STORE, "readonly");
     const store = tx.objectStore(TRIPS_STORE);
     return await store.getAll();

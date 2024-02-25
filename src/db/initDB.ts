@@ -1,5 +1,6 @@
 import { IDBPDatabase, openDB } from "idb";
 import { TripT } from "../types/trip";
+import registerShutdown from "../utils/shutdown";
 
 export const DB_NAME = "weather-forecast";
 export const TRIPS_STORE = "trips";
