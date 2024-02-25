@@ -68,7 +68,7 @@ const SideWeatherInfo = ({ trip }: SideWeatherInfoProps) => {
         <p className="city">{trip!.city}</p>
       </div>
 
-      <Timer start={trip.startDate} end={trip.endDate} />
+      <Timer key={trip.id} start={trip.startDate} end={trip.endDate} />
     </div>
   );
 };
