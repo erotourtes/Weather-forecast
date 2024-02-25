@@ -5,6 +5,7 @@ import { getForecastWeatherFor } from "../../api/weather";
 import { locationFrom } from "../../utils/utils";
 import WeatherCard from "../../components/WeatherCard/WeatherCard";
 import { stringToIcon, weekday } from "../../utils/mappers";
+import config from "../../config";
 
 const WeatherInfo = ({ trip }: { trip?: TripT }) => {
   const {
@@ -14,7 +15,7 @@ const WeatherInfo = ({ trip }: { trip?: TripT }) => {
     isRefetching,
     error,
   } = useQuery(
-    ["weather", { city: trip?.city }],
+    ["weather", trip?.city],
     async () =>
       await getForecastWeatherFor(
         locationFrom(trip),
@@ -24,7 +25,7 @@ const WeatherInfo = ({ trip }: { trip?: TripT }) => {
     {
       refetchOnWindowFocus: false,
       retry: false,
-      cacheTime: 1000 * 60 * 60 * 6, // 6 hours
+      staleTime: config.staleTime,
     }
   );
 

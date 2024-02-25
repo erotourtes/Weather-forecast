@@ -3,9 +3,10 @@ import { useQuery } from "react-query";
 import { getTodayWeatherFor } from "../../api/weather";
 import { TripT } from "../../types/trip";
 import { stringToIcon, today } from "../../utils/mappers";
-import { locationFrom } from "../../utils/utils";
+import { locationFrom, uuid } from "../../utils/utils";
 import "./SideWeatherInfo.css";
 import Timer from "../../components/Timer/Timer";
+import config from "../../config";
 
 interface SideWeatherInfoProps {
   trip?: TripT;
@@ -19,12 +20,12 @@ const SideWeatherInfo = ({ trip }: SideWeatherInfoProps) => {
     isRefetching,
     error,
   } = useQuery(
-    ["weather", { city: trip?.city }],
+    ["weather", trip?.city],
     async () => await getTodayWeatherFor(locationFrom(trip)),
     {
       refetchOnWindowFocus: false,
       retry: false,
-      cacheTime: 1000 * 60 * 60 * 6, // 6 hours
+      staleTime: config.staleTime,
     }
   );
 
