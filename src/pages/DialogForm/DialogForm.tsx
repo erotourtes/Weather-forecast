@@ -1,6 +1,6 @@
 import { IoClose } from "react-icons/io5";
 import styles from "./DialogForm.module.css";
-import { useForm } from "react-hook-form";
+import { FieldError, UseFormRegister, useForm } from "react-hook-form";
 import Divider from "../../components/Divider";
 import Button from "../../components/Button/Button";
 import ErrorLine from "../../components/ErrorLine";
@@ -68,49 +68,95 @@ const DialogForm = ({
 
       <div className={`flex1 flex center-v ${styles.padding}`}>
         <div className={`w-full`}>
-          <RequiredTitle title="City" />
-          <select defaultValue={""} {...register(PLACE, { required: true })}>
-            <option value={""}>Select your city</option>
-            {locations.map((location, index) => (
-              <option key={index} value={location}>
-                {location}
-              </option>
-            ))}
-          </select>
-          {errors[PLACE] && <ErrorLine text="City is required" />}
-
-          <RequiredTitle title="Start Date" />
-          <input
-            type="date"
-            min={getDateFromNow(0)}
-            max={getDateFromNow(config.limitOfDays)}
-            {...register(START_DATE, { required: true })}
-          />
-          {errors[START_DATE] && <ErrorLine text="Start date is required" />}
-
-          <RequiredTitle title="End Date" />
-          <input
-            type="date"
-            min={getDateFromNow(0)}
-            max={getDateFromNow(config.limitOfDays)}
-            {...register(END_DATE, { required: true })}
-          />
-          {errors[END_DATE] && <ErrorLine text="End date is required" />}
+          <CityInput register={register} errors={errors[PLACE]} />
+          <StartDateInput register={register} errors={errors[START_DATE]} />
+          <EndDateInput register={register} errors={errors[END_DATE]} />
         </div>
       </div>
 
       <Divider />
 
-      <div className={`flex row end ${styles.buttonRow} ${styles.padding}`}>
-        <Button onClick={onClose} variant="outlined">
-          Cancel
-        </Button>
-        <Button type="submit" variant="filled">
-          Save
-        </Button>
-      </div>
+      <BottomBtns onClose={onClose} />
     </form>
   );
 };
 
 export default DialogForm;
+
+const CityInput = ({
+  register,
+  errors,
+}: {
+  register: UseFormRegister<FormValues>;
+  errors?: FieldError;
+}) => {
+  return (
+    <>
+      <RequiredTitle title="City" />
+      <select defaultValue={""} {...register(PLACE, { required: true })}>
+        <option value={""}>Select your city</option>
+        {locations.map((location, index) => (
+          <option key={index} value={location}>
+            {location}
+          </option>
+        ))}
+      </select>
+      {errors && <ErrorLine text="City is required" />}
+    </>
+  );
+};
+
+const StartDateInput = ({
+  register,
+  errors,
+}: {
+  register: UseFormRegister<FormValues>;
+  errors?: FieldError;
+}) => {
+  return (
+    <>
+      <RequiredTitle title="Start Date" />
+      <input
+        type="date"
+        min={getDateFromNow(0)}
+        max={getDateFromNow(config.limitOfDays)}
+        {...register(START_DATE, { required: true })}
+      />
+      {errors && <ErrorLine text="Start date is required" />}
+    </>
+  );
+};
+
+const EndDateInput = ({
+  register,
+  errors,
+}: {
+  register: UseFormRegister<FormValues>;
+  errors?: FieldError;
+}) => {
+  return (
+    <>
+      <RequiredTitle title="End Date" />
+      <input
+        type="date"
+        min={getDateFromNow(0)}
+        max={getDateFromNow(config.limitOfDays)}
+        {...register(END_DATE, { required: true })}
+      />
+      {errors && <ErrorLine text="End date is required" />}
+    </>
+  );
+};
+
+const BottomBtns = ({ onClose }: { onClose: () => void }) => {
+  return (
+    <div className={`flex row end ${styles.buttonRow} ${styles.padding}`}>
+      <Button onClick={onClose} variant="outlined">
+        Cancel
+      </Button>
+      <Button type="submit" variant="filled">
+        Save
+      </Button>
+    </div>
+  );
+};
