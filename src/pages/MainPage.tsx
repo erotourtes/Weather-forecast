@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import Cards from "../components/Cards/Cards";
 import Dialog from "../components/Dialog/Dialog";
 import { SearchInput } from "../components/Input/Input";
@@ -10,10 +10,13 @@ import DialogForm from "./DialogForm/DialogForm";
 import "./MainPage.css";
 import SideWeatherInfo from "./SideWeatherInfo/SideWeatherInfo";
 import WeatherInfo from "./WeatherInfo/WeatherInfo";
+import { compareDates } from "../utils/utils";
 
 const MainPage = () => {
   const [isOpen, setOpen] = useState(false);
-  const [trips, setTrips] = useState<TripT[]>(dummyTrips);
+  const [trips, setTrips] = useState<TripT[]>(
+    dummyTrips.sort((a, b) => compareDates(a.startDate, b.startDate))
+  );
   const [selectedTripId, setSelectedTripId] = useState<string>("");
   const [serachInput, setSearchInput] = useState<string>("");
 
@@ -35,6 +38,18 @@ const MainPage = () => {
     addTrip(tripWithImg(data));
   };
 
+  const onSortChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    console.log(value);
+    setTrips((prev) =>
+      [...prev].sort((a, b) =>
+        value === "asc"
+          ? compareDates(a.startDate, b.startDate)
+          : compareDates(b.startDate, a.startDate)
+      )
+    );
+  };
+
   return (
     <div className="container-wrapper">
       <div className="container cards-row-gap">
@@ -42,11 +57,19 @@ const MainPage = () => {
           <h2>
             Weather <strong>Forecast</strong>
           </h2>
-          <div className="input">
-            <SearchInput
-              placeholder="Search your trip"
-              onChange={setSearchInput}
-            />
+          <div className="flex">
+            <div className="input">
+              <SearchInput
+                placeholder="Search your trip"
+                onChange={setSearchInput}
+              />
+            </div>
+            <div>
+              <select onChange={onSortChange}>
+                <option value="asc">Asc</option>
+                <option value="desc">Desc</option>
+              </select>
+            </div>
           </div>
           <div className="cards-row flex row center-h cards-row-gap">
             <Cards

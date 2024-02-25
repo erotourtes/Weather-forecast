@@ -14,3 +14,7 @@ export const getDateFromNow = (days: number) => {
   date.setDate(date.getDate() + days);
   return date.toISOString().split("T")[0];
 };
+
+export const compareDates = (a: string, b: string) => {
+  return new Date(a).getTime() - new Date(b).getTime();
+};
