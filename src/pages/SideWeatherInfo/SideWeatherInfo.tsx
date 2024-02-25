@@ -1,12 +1,13 @@
 import { WiCelsius } from "react-icons/wi";
 import { useQuery } from "react-query";
 import { getTodayWeatherFor } from "../../api/weather";
-import { TripT } from "../../types/trip";
-import { stringToIcon, today } from "../../utils/mappers";
-import { locationFrom, uuid } from "../../utils/utils";
-import "./SideWeatherInfo.css";
+import CloudAnimation from "../../components/CloudAnimation/CloudAnimation";
 import Timer from "../../components/Timer/Timer";
 import config from "../../config";
+import { TripT } from "../../types/trip";
+import { stringToIcon, today } from "../../utils/mappers";
+import { locationFrom } from "../../utils/utils";
+import "./SideWeatherInfo.css";
 
 interface SideWeatherInfoProps {
   trip?: TripT;
@@ -20,22 +21,39 @@ const SideWeatherInfo = ({ trip }: SideWeatherInfoProps) => {
     isRefetching,
     error,
   } = useQuery(
-    ["weather", trip?.city],
+    ["weather-side-info", trip?.city],
     async () => await getTodayWeatherFor(locationFrom(trip)),
     {
       refetchOnWindowFocus: false,
       retry: false,
       staleTime: config.staleTime,
+      cacheTime: config.cacheTime,
     }
   );
 
-  // TODO: handle errors
-  if (isLoading || isRefetching) return <div>Loading...</div>;
-  if (isError) return <div>Error</div>;
-  if (!weatherData) return <div>No data</div>;
-  if (!trip) return <div>No trip</div>;
+  if (isError)
+    return (
+      <div className={"weather-info flex center column"}>
+        <h2>Error</h2>
+      </div>
+    );
 
-  const dayWeather = weatherData.days[0];
+  if (isLoading || isRefetching || !weatherData)
+    return (
+      <div className={"weather-info flex center column"}>
+        <CloudAnimation />
+      </div>
+    );
+
+  const dayWeather = weatherData!.days[0];
+
+  if (!trip)
+    return (
+      <div className={"weather-info flex center column"}>
+        <h2>Select a trip</h2>
+        <CloudAnimation />
+      </div>
+    );
 
   return (
     <div className={"weather-info flex center column"}>

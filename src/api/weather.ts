@@ -7,9 +7,10 @@ const base =
 export const getTodayWeatherFor = async (
   location?: string
 ): Promise<TodayWeatherT | undefined> => {
-  if (config.env === "development") {
-    return todayWeatherApi as TodayWeatherT;
-  }
+  // if (config.env === "development") {
+  //   return todayWeatherApi as TodayWeatherT;
+  // }
+  console.log("REFETCHING");
 
   if (!location) return;
   const response = await fetch(
