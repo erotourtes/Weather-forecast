@@ -5,13 +5,7 @@ import { TripT } from "../../types/trip";
 import { stringToIcon, today } from "../../utils/mappers";
 import { locationFrom } from "../../utils/utils";
 import "./SideWeatherInfo.css";
-
-const time = [
-  [30, "DAYS"],
-  [15, "HOURS"],
-  [15, "MINUTES"],
-  [30, "SECONDS"],
-];
+import Timer from "../../components/Timer/Timer";
 
 interface SideWeatherInfoProps {
   trip?: TripT;
@@ -54,14 +48,7 @@ const SideWeatherInfo = ({ trip }: SideWeatherInfoProps) => {
         <p className="city">{trip!.city}</p>
       </div>
 
-      <div className="time-row flex w-full space-evenly">
-        {time.map(([value, unit], index) => (
-          <div key={index} className="flex center column">
-            <p className="time">{value}</p>
-            <p className="unit">{unit}</p>
-          </div>
-        ))}
-      </div>
+      <Timer start={trip.startDate} end={trip.endDate} />
     </div>
   );
 };

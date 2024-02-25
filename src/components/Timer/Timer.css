@@ -1,0 +1,6 @@
+.time-row>* {
+    backdrop-filter: brightness(80%);
+    border-radius: 0.7rem;
+    padding: .3rem;
+    width: 3rem;
+}
