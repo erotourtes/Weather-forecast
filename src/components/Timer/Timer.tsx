@@ -24,6 +24,7 @@ const Timer = ({
     time = 0;
     state = "Ended";
   } else {
+    state = "Ends in";
     time = endOrig.getTime() - now;
   }
 
