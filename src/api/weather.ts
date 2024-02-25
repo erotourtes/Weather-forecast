@@ -32,8 +32,18 @@ export const getForecastWeatherFor = async (
   }
   if (!location || !start || !end) return;
 
+  const limit = config.limitOfDays;
+  const diff = new Date(end).getTime() - new Date(start).getTime();
+  const numberOfDays = diff / (1000 * 60 * 60 * 24);
+  let endDay = end;
+  if (numberOfDays > limit) {
+    const date = new Date(start);
+    date.setDate(date.getDate() + limit);
+    endDay = date.toISOString().split("T")[0];
+  }
+
   const response = await fetch(
-    `${base}/${location}/${start}/${end}?unitGroup=metric&key=${config.apiKey}&contentType=json`
+    `${base}/${location}/${start}/${endDay}?unitGroup=metric&key=${config.apiKey}&contentType=json`
   );
 
   return await response.json();
