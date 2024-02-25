@@ -18,6 +18,8 @@ const init = async () => {
     },
   });
 
+  registerShutdown(() => db.close());
+
   return db;
 };
 
