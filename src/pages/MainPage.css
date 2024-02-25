@@ -50,3 +50,15 @@
     padding: 0 .5rem;
   }
 }
+
+@container (max-width: 768px) {
+  .container {
+    .cards-row {
+      flex-direction: column;
+    }
+
+    .cards-row::nth-child(2) {
+      width: 100%;
+    }
+  }
+}
