@@ -1,0 +1,35 @@
+import { ReactElement, cloneElement } from "react";
+import { IconsT } from "../api/weather";
+import {
+  WiCloud,
+  WiCloudyGusts,
+  WiDayCloudy,
+  WiDaySunny,
+  WiFog,
+  WiNightAltCloudy,
+  WiNightClear,
+  WiRainMix,
+  WiSnowWind,
+} from "react-icons/wi";
+import { TiWeatherCloudy } from "react-icons/ti";
+
+const daysMapper = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+export const today = () => daysMapper[new Date().getDay()];
+
+const stringToIconMapper: { [K in IconsT]: ReactElement } = {
+  snow: <WiSnowWind />,
+  "clear-day": <WiDaySunny />,
+  "partly-cloudy-day": <WiDayCloudy />,
+  "clear-night": <WiNightClear />,
+  "partly-cloudy-night": <WiNightAltCloudy />,
+  cloudy: <TiWeatherCloudy />,
+  fog: <WiFog />,
+  rain: <WiRainMix />,
+  wind: <WiCloudyGusts />,
+};
+
+export const stringToIcon = (icon: IconsT, size: number | undefined = 1) => {
+  const jsx = stringToIconMapper[icon] || <WiCloud />;
+  return <jsx.type {...jsx.props} size={size} />;
+};

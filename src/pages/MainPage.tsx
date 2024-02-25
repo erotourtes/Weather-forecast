@@ -5,10 +5,15 @@ import { SearchInput } from "../components/Input/Input";
 import dummyTrips from "../dummy/trips";
 import Dialog from "../components/Dialog/Dialog";
 import DialogForm from "./DialogForm/DialogForm";
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 import { TripT } from "../types/trip";
 import SideWeatherInfo from "./SideWeatherInfo/SideWeatherInfo";
-import { locationFrom } from "../utils/utils";
+import { IconsT } from "../api/weather";
+import { WiSnowWind } from "react-icons/wi";
+
+const stringToIcon: { [K in IconsT]: ReactElement } = {
+  snow: <WiSnowWind />,
+};
 
 const MainPage = () => {
   const [isOpen, setOpen] = useState(false);
@@ -59,13 +64,7 @@ const MainPage = () => {
           <div>Week forecast goes here</div>
         </div>
         <div className="side">
-          <SideWeatherInfo
-            info={{
-              city: locationFrom(selectedTrip),
-              temperture: 20,
-              day: "Today",
-            }}
-          />
+          <SideWeatherInfo trip={selectedTrip} />
         </div>
       </div>
 
