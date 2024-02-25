@@ -1,6 +1,11 @@
 import { IoClose } from "react-icons/io5";
 import styles from "./DialogForm.module.css";
-import { FieldError, UseFormRegister, useForm } from "react-hook-form";
+import {
+  FieldError,
+  UseFormRegister,
+  Validate,
+  useForm,
+} from "react-hook-form";
 import Divider from "../../components/Divider";
 import Button from "../../components/Button/Button";
 import ErrorLine from "../../components/ErrorLine";
@@ -41,6 +46,20 @@ const DialogForm = ({
     reset();
   };
 
+  const validateEndDate: Validate<string, FormValues> = (
+    endDate: string,
+    form: FormValues
+  ) => {
+    const startStr = form[START_DATE];
+    if (!startStr) return true;
+    const start = new Date(startStr);
+    const end = new Date(endDate);
+
+    if (start.getTime() > end.getTime()) {
+      return "End date must come after start date";
+    }
+  };
+
   const onSubmit = (data: FormValues) => {
     const [city, country] = data[PLACE].split(",");
 
@@ -70,7 +89,11 @@ const DialogForm = ({
         <div className={`w-full`}>
           <CityInput register={register} errors={errors[PLACE]} />
           <StartDateInput register={register} errors={errors[START_DATE]} />
-          <EndDateInput register={register} errors={errors[END_DATE]} />
+          <EndDateInput
+            validation={validateEndDate}
+            register={register}
+            errors={errors[END_DATE]}
+          />
         </div>
       </div>
 
@@ -130,8 +153,10 @@ const StartDateInput = ({
 const EndDateInput = ({
   register,
   errors,
+  validation,
 }: {
   register: UseFormRegister<FormValues>;
+  validation: Validate<string, FormValues>;
   errors?: FieldError;
 }) => {
   return (
@@ -141,9 +166,15 @@ const EndDateInput = ({
         type="date"
         min={getDateFromNow(0)}
         max={getDateFromNow(config.limitOfDays)}
-        {...register(END_DATE, { required: true })}
+        {...register(END_DATE, { required: true, validate: validation })}
       />
-      {errors && <ErrorLine text="End date is required" />}
+      {errors && (
+        <ErrorLine
+          text={
+            errors.type === "required" ? "End Date is required" : errors.message
+          }
+        />
+      )}
     </>
   );
 };

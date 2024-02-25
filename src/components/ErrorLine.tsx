@@ -1,4 +1,4 @@
-const ErrorLine = ({ text }: { text: string }) => {
+const ErrorLine = ({ text }: { text?: string }) => {
   return (
     <div
       style={{
