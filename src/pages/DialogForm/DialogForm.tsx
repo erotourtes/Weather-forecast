@@ -68,10 +68,8 @@ const DialogForm = ({
       <div className={`flex1 flex center-v ${styles.padding}`}>
         <div className={`w-full`}>
           <RequiredTitle title="City" />
-          <select {...register(PLACE, { required: true })}>
-            <option selected defaultChecked value={""}>
-              Select your city
-            </option>
+          <select defaultValue={""} {...register(PLACE, { required: true })}>
+            <option value={""}>Select your city</option>
             {locations.map((location, index) => (
               <option key={index} value={location}>
                 {location}
