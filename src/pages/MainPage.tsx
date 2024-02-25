@@ -2,52 +2,38 @@ import { ChangeEvent, useState } from "react";
 import Cards from "../components/Cards/Cards";
 import Dialog from "../components/Dialog/Dialog";
 import { SearchInput } from "../components/Input/Input";
+import useTrips from "../db/useTrip";
 import { tripWithImg } from "../dummy/locations";
-import dummyTrips from "../dummy/trips";
 import { TripT } from "../types/trip";
 import AddCardBtn from "./AddCardBtn";
 import DialogForm from "./DialogForm/DialogForm";
 import "./MainPage.css";
 import SideWeatherInfo from "./SideWeatherInfo/SideWeatherInfo";
 import WeatherInfo from "./WeatherInfo/WeatherInfo";
-import { compareDates } from "../utils/utils";
 
 const MainPage = () => {
+  const trips = useTrips();
   const [isOpen, setOpen] = useState(false);
-  const [trips, setTrips] = useState<TripT[]>(
-    dummyTrips.sort((a, b) => compareDates(a.startDate, b.startDate))
-  );
   const [selectedTripId, setSelectedTripId] = useState<string>("");
   const [serachInput, setSearchInput] = useState<string>("");
 
-  const filteredTrips = trips.filter((trip) =>
+  const filteredTrips = trips.trips.filter((trip) =>
     trip.city.toLowerCase().includes(serachInput.toLowerCase())
   );
 
   const selectedTrip =
     filteredTrips.length == 1
       ? filteredTrips[0]
-      : trips.find((trip) => trip.id === selectedTripId);
-
-  const addTrip = (data: TripT) => {
-    setTrips((prev) => [...prev, data]);
-  };
+      : trips.trips.find((trip) => trip.id === selectedTripId);
 
   const handleSubmit = (data: TripT) => {
     setOpen(false);
-    addTrip(tripWithImg(data));
+    trips.addTrip(tripWithImg(data));
   };
 
   const onSortChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
-    console.log(value);
-    setTrips((prev) =>
-      [...prev].sort((a, b) =>
-        value === "asc"
-          ? compareDates(a.startDate, b.startDate)
-          : compareDates(b.startDate, a.startDate)
-      )
-    );
+    const value = e.target.value as "asc" | "desc";
+    trips.chnageTripOrder(value);
   };
 
   return (
