@@ -5,9 +5,10 @@ import Divider from "../../components/Divider";
 import Button from "../../components/Button/Button";
 import ErrorLine from "../../components/ErrorLine";
 import { TripT } from "../../types/trip";
-import { uuid } from "../../utils/utils";
+import { getDateFromNow, uuid } from "../../utils/utils";
 import RequiredTitle from "./RequiredTitle";
 import locations from "../../dummy/locations";
+import config from "../../config";
 
 const PLACE = "city";
 const START_DATE = "startDate";
@@ -79,11 +80,21 @@ const DialogForm = ({
           {errors[PLACE] && <ErrorLine text="City is required" />}
 
           <RequiredTitle title="Start Date" />
-          <input type="date" {...register(START_DATE, { required: true })} />
+          <input
+            type="date"
+            min={getDateFromNow(0)}
+            max={getDateFromNow(config.limitOfDays)}
+            {...register(START_DATE, { required: true })}
+          />
           {errors[START_DATE] && <ErrorLine text="Start date is required" />}
 
           <RequiredTitle title="End Date" />
-          <input type="date" {...register(END_DATE, { required: true })} />
+          <input
+            type="date"
+            min={getDateFromNow(0)}
+            max={getDateFromNow(config.limitOfDays)}
+            {...register(END_DATE, { required: true })}
+          />
           {errors[END_DATE] && <ErrorLine text="End date is required" />}
         </div>
       </div>

@@ -8,3 +8,9 @@ export const locationFrom = (trip: TripT | null | undefined) => {
   if (!trip) return "";
   return `${trip.city}, ${trip.country}`;
 };
+
+export const getDateFromNow = (days: number) => {
+  const date = new Date();
+  date.setDate(date.getDate() + days);
+  return date.toISOString().split("T")[0];
+};
