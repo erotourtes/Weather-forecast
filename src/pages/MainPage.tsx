@@ -16,6 +16,7 @@ const MainPage = () => {
   const [isOpen, setOpen] = useState(false);
   const [selectedTripId, setSelectedTripId] = useState<string>("");
   const [serachInput, setSearchInput] = useState<string>("");
+  const [order, setOrder] = useState<"asc" | "desc">("asc");
 
   const filteredTrips = trips.trips.filter((trip) =>
     trip.city.toLowerCase().includes(serachInput.toLowerCase())
@@ -28,11 +29,12 @@ const MainPage = () => {
 
   const handleSubmit = (data: TripT) => {
     setOpen(false);
-    trips.addTrip(tripWithImg(data));
+    trips.addTrip(tripWithImg(data)).then(() => trips.chnageTripOrder(order));
   };
 
   const onSortChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as "asc" | "desc";
+    setOrder(value);
     trips.chnageTripOrder(value);
   };
 
