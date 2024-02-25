@@ -1,5 +1,5 @@
-import { ReactElement, cloneElement } from "react";
-import { IconsT } from "../api/weather";
+import { ReactElement } from "react";
+import { TiWeatherCloudy } from "react-icons/ti";
 import {
   WiCloud,
   WiCloudyGusts,
@@ -11,7 +11,6 @@ import {
   WiRainMix,
   WiSnowWind,
 } from "react-icons/wi";
-import { TiWeatherCloudy } from "react-icons/ti";
 
 const daysMapper = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 

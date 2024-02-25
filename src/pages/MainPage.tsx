@@ -1,19 +1,13 @@
-import "./MainPage.css";
-import AddCardBtn from "./AddCardBtn";
+import { useState } from "react";
 import Cards from "../components/Cards/Cards";
+import Dialog from "../components/Dialog/Dialog";
 import { SearchInput } from "../components/Input/Input";
 import dummyTrips from "../dummy/trips";
-import Dialog from "../components/Dialog/Dialog";
-import DialogForm from "./DialogForm/DialogForm";
-import { ReactElement, useState } from "react";
 import { TripT } from "../types/trip";
+import AddCardBtn from "./AddCardBtn";
+import DialogForm from "./DialogForm/DialogForm";
+import "./MainPage.css";
 import SideWeatherInfo from "./SideWeatherInfo/SideWeatherInfo";
-import { IconsT } from "../api/weather";
-import { WiSnowWind } from "react-icons/wi";
-
-const stringToIcon: { [K in IconsT]: ReactElement } = {
-  snow: <WiSnowWind />,
-};
 
 const MainPage = () => {
   const [isOpen, setOpen] = useState(false);

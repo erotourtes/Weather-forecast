@@ -1,11 +1,10 @@
-import { TiWeatherCloudy } from "react-icons/ti";
-import "./SideWeatherInfo.css";
-import { TripT } from "../../types/trip";
-import { getTodayWeatherFor } from "../../api/weather";
-import { useQuery } from "react-query";
-import { locationFrom } from "../../utils/utils";
-import { stringToIcon, today } from "../../utils/mappers";
 import { WiCelsius } from "react-icons/wi";
+import { useQuery } from "react-query";
+import { getTodayWeatherFor } from "../../api/weather";
+import { TripT } from "../../types/trip";
+import { stringToIcon, today } from "../../utils/mappers";
+import { locationFrom } from "../../utils/utils";
+import "./SideWeatherInfo.css";
 
 const time = [
   [30, "DAYS"],
@@ -39,6 +38,7 @@ const SideWeatherInfo = ({ trip }: SideWeatherInfoProps) => {
   if (isLoading || isRefetching) return <div>Loading...</div>;
   if (isError) return <div>Error</div>;
   if (!weatherData) return <div>No data</div>;
+  if (!trip) return <div>No trip</div>;
 
   const dayWeather = weatherData.days[0];
 
