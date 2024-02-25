@@ -75,7 +75,7 @@ const MainPage = () => {
         </div>
       </div>
 
-      <Dialog isOpen={isOpen}>
+      <Dialog isOpen={isOpen} onClose={() => setOpen(false)}>
         <DialogForm onClose={() => setOpen(false)} onSubmit={handleSubmit} />
       </Dialog>
     </div>

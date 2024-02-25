@@ -4,9 +4,10 @@ import classNames from "classnames";
 
 interface DialogProps extends PropsWithChildren {
   isOpen: boolean;
+  onClose: () => void;
 }
 
-const Dialog = ({ children, isOpen }: DialogProps) => {
+const Dialog = ({ children, isOpen, onClose }: DialogProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -23,16 +24,20 @@ const Dialog = ({ children, isOpen }: DialogProps) => {
       document.body.style.overflow = "hidden";
       ref.current.style.top = `${window.scrollY}px`;
       window.addEventListener("resize", handleResize);
+      ref.current.onclick = (e) => {
+        if (e.target === ref.current) onClose();
+      };
     } else {
       document.body.style.overflow = "auto";
       window.removeEventListener("resize", handleResize);
+      ref.current.onclick = null;
     }
 
     return () => {
       window.removeEventListener("resize", handleResize);
       document.body.style.overflow = "auto";
     };
-  }, [isOpen, ref]);
+  }, [isOpen, ref, onClose]);
 
   return (
     <div
