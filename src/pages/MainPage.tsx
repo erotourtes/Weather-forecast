@@ -49,7 +49,7 @@ const MainPage = () => {
               onChange={setSearchInput}
             />
           </div>
-          <div className="flex row cards-row-gap">
+          <div className="flex row center-h cards-row-gap">
             <Cards
               cards={filteredTrips}
               onCardClick={(id) => setSelectedTripId(id)}
