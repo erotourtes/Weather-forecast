@@ -8,6 +8,7 @@ import { TripT } from "../../types/trip";
 import { stringToIcon, today } from "../../utils/mappers";
 import { locationFrom } from "../../utils/utils";
 import "./SideWeatherInfo.css";
+import ErrorElement from "../../components/Error";
 
 interface SideWeatherInfoProps {
   trip?: TripT;
@@ -34,7 +35,7 @@ const SideWeatherInfo = ({ trip }: SideWeatherInfoProps) => {
   if (isError)
     return (
       <div className={"weather-info flex center column"}>
-        <h2>Error</h2>
+        <ErrorElement error={error} />
       </div>
     );
 

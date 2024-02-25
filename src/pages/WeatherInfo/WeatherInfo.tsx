@@ -6,6 +6,7 @@ import { locationFrom } from "../../utils/utils";
 import WeatherCard from "../../components/WeatherCard/WeatherCard";
 import { stringToIcon, weekday } from "../../utils/mappers";
 import config from "../../config";
+import ErrorElement from "../../components/Error";
 
 const WeatherInfo = ({ trip }: { trip?: TripT }) => {
   const {
@@ -29,8 +30,8 @@ const WeatherInfo = ({ trip }: { trip?: TripT }) => {
     }
   );
 
-  if (!trip) return <div>No trip</div>;
-  if (isError) return <div>Error</div>;
+  if (!trip) return <div>Select a trip</div>;
+  if (isError) return <ErrorElement error={error} />;
   if (isLoading || isRefetching) return <div>Loading...</div>;
   if (!weatherData) return <div>No data</div>;
 

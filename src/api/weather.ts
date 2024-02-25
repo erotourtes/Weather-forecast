@@ -7,15 +7,20 @@ const base =
 export const getTodayWeatherFor = async (
   location?: string
 ): Promise<TodayWeatherT | undefined> => {
-  // if (config.env === "development") {
-  //   return todayWeatherApi as TodayWeatherT;
-  // }
-  console.log("REFETCHING");
+  if (config.env === "development") {
+    return todayWeatherApi as TodayWeatherT;
+  }
 
   if (!location) return;
   const response = await fetch(
     `${base}/${location}/today?unitGroup=metric&include=days&key=${config.apiKey}&contentType=json`
   );
+
+  if (!response.ok)
+    throw new Error(
+      `Failed to fetch today's weather: ${await response.text()}`
+    );
+
   return await response.json();
 };
 
@@ -46,6 +51,11 @@ export const getForecastWeatherFor = async (
   const response = await fetch(
     `${base}/${location}/${start}/${endDay}?unitGroup=metric&key=${config.apiKey}&contentType=json`
   );
+
+  if (!response.ok)
+    throw new Error(
+      `Failed to fetch today's weather: ${await response.text()}`
+    );
 
   return await response.json();
 };
