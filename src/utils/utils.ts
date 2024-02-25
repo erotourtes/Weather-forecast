@@ -6,7 +6,7 @@ export const uuid = () => {
 
 export const locationFrom = (trip: TripT | null | undefined) => {
   if (!trip) return "";
-  return `${trip.city}, ${trip.country}`;
+  return `${trip.city.trim()}, ${trip.country.trim()}`;
 };
 
 export const getDateFromNow = (days: number) => {

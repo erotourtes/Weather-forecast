@@ -61,7 +61,7 @@ const DialogForm = ({
   };
 
   const onSubmit = (data: FormValues) => {
-    const [city, country] = data[PLACE].split(",");
+    const [city, country] = data[PLACE].split(", ");
 
     onSubmitOrig({
       id: uuid(),

@@ -2,6 +2,7 @@ import { useState } from "react";
 import Cards from "../components/Cards/Cards";
 import Dialog from "../components/Dialog/Dialog";
 import { SearchInput } from "../components/Input/Input";
+import { tripWithImg } from "../dummy/locations";
 import dummyTrips from "../dummy/trips";
 import { TripT } from "../types/trip";
 import AddCardBtn from "./AddCardBtn";
@@ -31,7 +32,7 @@ const MainPage = () => {
 
   const handleSubmit = (data: TripT) => {
     setOpen(false);
-    addTrip(data);
+    addTrip(tripWithImg(data));
   };
 
   return (
