@@ -60,7 +60,7 @@ type StationT = {
   contribution: number;
 };
 
-type TodayWeatherT = {
+type WeatherT = {
   address: string;
   latitude: number;
   longitude: number;
@@ -70,4 +70,8 @@ type TodayWeatherT = {
   tzoffset: number;
   days: WeatherDayT[];
   stations: { [key: string]: StationT };
+};
+
+type TodayWeatherT = WeatherT & {
+  days: [WeatherDayT];
 };

@@ -12,9 +12,12 @@ import {
   WiSnowWind,
 } from "react-icons/wi";
 
-const daysMapper = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+export const weekday = (date: string) =>
+  new Date(date).toLocaleDateString("en-US", {
+    weekday: "long",
+  });
 
-export const today = () => daysMapper[new Date().getDay()];
+export const today = () => weekday(new Date().toISOString());
 
 const stringToIconMapper: { [K in IconsT]: ReactElement } = {
   snow: <WiSnowWind />,

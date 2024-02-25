@@ -28,7 +28,7 @@ const SideWeatherInfo = ({ trip }: SideWeatherInfoProps) => {
     }
   );
 
-  console.log(weatherData, isError, error, isLoading);
+  // TODO: handle errors
   if (isLoading || isRefetching) return <div>Loading...</div>;
   if (isError) return <div>Error</div>;
   if (!weatherData) return <div>No data</div>;

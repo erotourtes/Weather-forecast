@@ -1,6 +1,9 @@
 import config from "../config";
 import todayWeatherApi from "../dummy/todayWeatherApi";
 
+const base =
+  "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline";
+
 export const getTodayWeatherFor = async (
   location?: string
 ): Promise<TodayWeatherT | undefined> => {
@@ -10,11 +13,28 @@ export const getTodayWeatherFor = async (
 
   if (!location) return;
   const response = await fetch(
-    `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/today?unitGroup=metric&include=days&key=${config.apiKey}&contentType=json`
+    `${base}/${location}/today?unitGroup=metric&include=days&key=${config.apiKey}&contentType=json`
   );
   return await response.json();
 };
 
-// export const getWeatherFor = async (city: String) => {
-//     const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/[date1]/[date2]?unitGroup=metric&amp;include=days&amp;key=${config.apiKey}&amp;contentType=json`
-// }
+export const getForecastWeatherFor = async (
+  location?: string,
+  start?: string,
+  end?: string
+): Promise<WeatherT | undefined> => {
+  if (config.env === "development") {
+    const temp = { ...todayWeatherApi };
+    for (let i = 0; i < 4; i++) {
+      temp.days.push(temp.days[0]);
+    }
+    return temp as WeatherT;
+  }
+  if (!location || !start || !end) return;
+
+  const response = await fetch(
+    `${base}/${location}/${start}/${end}?unitGroup=metric&key=${config.apiKey}&contentType=json`
+  );
+
+  return await response.json();
+};

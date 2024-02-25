@@ -8,6 +8,9 @@ import AddCardBtn from "./AddCardBtn";
 import DialogForm from "./DialogForm/DialogForm";
 import "./MainPage.css";
 import SideWeatherInfo from "./SideWeatherInfo/SideWeatherInfo";
+import WeatherCard from "../components/WeatherCard/WeatherCard";
+import { ImConfused } from "react-icons/im";
+import WeatherInfo from "./WeatherInfo/WeatherInfo";
 
 const MainPage = () => {
   const [isOpen, setOpen] = useState(false);
@@ -55,7 +58,7 @@ const MainPage = () => {
             <AddCardBtn onClick={() => setOpen(true)} />
           </div>
           <h4>Week</h4>
-          <div>Week forecast goes here</div>
+          <WeatherInfo trip={selectedTrip} />
         </div>
         <div className="side">
           <SideWeatherInfo trip={selectedTrip} />

@@ -1,7 +1,7 @@
 import "./WeatherCard.css";
 
 interface WeatherCardProps {
-  icon: React.ReactNode;
+  icon: React.ReactElement;
   min: number;
   max: number;
   weekday: string;
